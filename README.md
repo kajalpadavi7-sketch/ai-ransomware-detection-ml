@@ -2,6 +2,7 @@
 
 ## 📌 Project Overview
 
+<<<<<<< HEAD
 This research project focuses on developing an **AI-based ransomware detection
 framework using machine learning and static analysis of Windows Portable
 Executable (PE) files**.
@@ -91,3 +92,264 @@ SHAP Explainability
 Secondary Dataset Validation
         ↓
 Prototype Detection Application
+=======
+This is an academic research project for detecting ransomware in Windows Portable Executable (PE) files using **Machine Learning and static analysis**.
+
+The **RanDS dataset** is used to train and evaluate multiple machine learning models. A major focus of the project is testing whether models trained on known ransomware families can detect ransomware from **unseen ransomware families**.
+
+SHAP is also used for explainable AI to understand the importance of different features.
+
+---
+
+## 🎯 Objectives
+
+- Detect ransomware using static PE features.
+- Extract API and DLL-based statistical features.
+- Train and compare multiple ML models.
+- Evaluate performance on unseen ransomware families.
+- Analyze feature importance using SHAP.
+- Perform threshold analysis.
+- Develop an `.exe` prediction prototype as future work.
+
+---
+
+## ⚙️ Features Used
+
+```text
+API_Count
+DLL_Count
+Unique_API_Count
+Unique_DLL_Count
+Size
+Packed
+Entropy
+Year
+```
+
+---
+
+## 🤖 Machine Learning Models
+
+- Logistic Regression
+- Decision Tree
+- Random Forest
+- XGBoost
+- LightGBM
+
+### 🏆 Best Current Model
+
+**Random Forest**
+
+| Metric | Result |
+|---|---:|
+| Accuracy | 90.20% |
+| Precision | 98.88% |
+| Recall | 87.02% |
+| F1 Score | 92.57% |
+| ROC-AUC | 97.72% |
+
+---
+
+## 📁 Project Structure
+
+```text
+ai-ransomware-detection-ml/
+│
+├── data/
+│   ├── raw/
+│   │   └── RanDS/
+│   └── processed/
+│       ├── benign_clean.csv
+│       ├── ransomware_clean.csv
+│       ├── api_features.csv
+│       ├── ml_features.csv
+│       ├── train_unseen_family.csv
+│       └── test_unseen_family.csv
+│
+├── results/
+│   ├── models/
+│   │   ├── random_forest.joblib
+│   │   ├── xgboost.joblib
+│   │   ├── lightgbm.joblib
+│   │   ├── decision_tree.joblib
+│   │   └── logistic_regression.joblib
+│   │
+│   ├── evaluation/
+│   │   ├── roc_curve.png
+│   │   ├── precision_recall_curve.png
+│   │   ├── threshold_analysis.csv
+│   │   └── unseen_family_performance.csv
+│   │
+│   └── shap/
+│       ├── feature_importance.csv
+│       ├── shap_feature_importance.png
+│       └── shap_summary_plot.png
+│
+├── src/
+│   ├── preprocessing/
+│   │   ├── clean_rands.py
+│   │   └── prepare_features.py
+│   ├── features/
+│   │   └── extract_api_features.py
+│   ├── models/
+│   │   └── train_models.py
+│   └── evaluation/
+│       ├── create_unseen_family_split.py
+│       ├── evaluate_models.py
+│       ├── unseen_family_performance.py
+│       ├── threshold_analysis.py
+│       └── shap_analysis.py
+│
+├── requirements.txt
+├── README.md
+└── .gitignore
+```
+
+---
+
+## 🛠️ Technologies Used
+
+- Python
+- Pandas
+- NumPy
+- Scikit-learn
+- XGBoost
+- LightGBM
+- SHAP
+- Matplotlib
+- Joblib
+- Git & GitHub
+- Visual Studio Code
+
+---
+
+## 🔄 Workflow
+
+```text
+RanDS Dataset
+     ↓
+Preprocessing
+     ↓
+API/DLL Feature Extraction
+     ↓
+ML Feature Preparation
+     ↓
+Unseen-Family Split
+     ↓
+Model Training
+     ↓
+Model Comparison
+     ↓
+Random Forest Selection
+     ↓
+Unseen-Family Evaluation
+     ↓
+Threshold Analysis
+     ↓
+SHAP Explainability
+```
+
+---
+
+## ▶️ Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/kajalpadavi7-sketch/ai-ransomware-detection-ml.git
+cd ai-ransomware-detection-ml
+```
+
+Create virtual environment:
+
+```powershell
+python -m venv .venv
+```
+
+Activate:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+Install dependencies:
+
+```powershell
+pip install -r requirements.txt
+```
+
+---
+
+## ▶️ Run the Project
+
+Run the scripts in order:
+
+```powershell
+python src/preprocessing/clean_rands.py
+```
+
+```powershell
+python src/features/extract_api_features.py
+```
+
+```powershell
+python src/preprocessing/prepare_features.py
+```
+
+```powershell
+python src/evaluation/create_unseen_family_split.py
+```
+
+```powershell
+python src/models/train_models.py
+```
+
+```powershell
+python src/evaluation/evaluate_models.py
+```
+
+```powershell
+python src/evaluation/unseen_family_performance.py
+```
+
+```powershell
+python src/evaluation/threshold_analysis.py
+```
+
+```powershell
+python src/evaluation/shap_analysis.py
+```
+
+---
+
+## 🔬 Current Status
+
+### Completed
+
+- [x] RanDS preprocessing
+- [x] API/DLL feature extraction
+- [x] ML feature preparation
+- [x] Unseen-family evaluation
+- [x] Multiple ML models
+- [x] Model comparison
+- [x] Random Forest selection
+- [x] Threshold analysis
+- [x] SHAP explainability
+
+### Future Work
+
+- [ ] Robustness testing
+- [ ] Unknown/anomaly detection
+- [ ] Secondary dataset validation
+- [ ] New `.exe` feature extraction
+- [ ] `.exe` ransomware prediction prototype
+
+---
+
+## 👩‍💻 Author
+
+**Kajal Padvi**  
+MCA Research Project
+
+> This project is intended for academic and defensive cybersecurity research. It does not guarantee zero-day ransomware detection.
+
