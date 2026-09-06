@@ -9,3 +9,12 @@ data/external/
 *.pkl
 *.joblib
 .vscode/
+
+data/processed/*.csv
+*.tmp
+*.log
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
+Thumbs.db
