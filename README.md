@@ -352,4 +352,181 @@ python src/evaluation/shap_analysis.py
 MCA Research Project
 
 > This project is intended for academic and defensive cybersecurity research. It does not guarantee zero-day ransomware detection.
+==================================
 
+1. Get overall metrics for the unseen-family test set
+2. Investigate why Year is the dominant SHAP feature
+3. Then proceed to novelty/anomaly detection
+4. Then secondary dataset validation
+5. Then the .exe prototype
+
+========================
+
+Phase 1 — Explainability
+
+बाकी/अगला important काम
+
+तुमने SHAP पहले किया है और तुम्हारे पास:
+
+Year
+Entropy
+Size
+Packed
+Unique_API_Count
+DLL_Count
+API_Count
+Unique_DLL_Count
+
+की feature importance है।
+
+लेकिन अब हमें इसे proper research experiment बनाना है:
+
+Random Forest → SHAP → Global Feature Importance → Individual Prediction Explanation
+
+और graphs/results save करने हैं।
+
+Phase 2 — Unknown / Novel Ransomware Detection
+
+यह तुम्हारे research का सबसे important novelty part है।
+
+तुम्हारे paper का goal केवल:
+
+"Ransomware vs Benign"
+
+नहीं होना चाहिए।
+
+बल्कि:
+
+Known ransomware detection + unseen ransomware-family generalization + unknown/novel ransomware detection
+
+हमें इसके लिए Isolation Forest / anomaly detection experiment properly करना होगा।
+
+यही तुम्हारे project को simple ML classification project से research-oriented framework बनाने में मदद करेगा।
+
+Phase 3 — Secondary Validation
+
+अगर तुम्हारे research design में secondary dataset रखा है, तो उसके ऊपर model validation करना होगा।
+
+उदाहरण:
+
+Primary Dataset
+      ↓
+RanDS
+      ↓
+Training + Standard Test
+      ↓
+Unseen Family Test
+      ↓
+Unknown Detection
+      ↓
+Secondary Dataset Validation
+
+यह research paper के लिए बहुत strong experiment होगा।
+
+Phase 4 — Final Framework
+
+इसके बाद पूरा framework:
+
+PE File (.exe)
+       ↓
+Static Feature Extraction
+       ↓
+Preprocessing
+       ↓
+Feature Selection
+       ↓
+Random Forest
+       ↓
+Known / Ransomware Detection
+       ↓
+Unseen Family Evaluation
+       ↓
+Unknown / Novel Detection
+       ↓
+SHAP Explainability
+       ↓
+Final Prediction
+
+को implement/document करना है।
+
+Phase 5 — Final Graphs & Tables
+
+Paper के लिए हमें final figures बनाने होंगे:
+
+Model comparison
+Accuracy comparison
+Precision/Recall/F1 comparison
+ROC curve
+Precision-Recall curve
+Confusion matrix
+SHAP feature importance
+Unseen-family recall distribution
+Threshold vs F1
+Threshold vs Recall/FNR
+Known vs unseen performance comparison
+Phase 6 — Research Paper
+
+इसके बाद paper writing:
+
+1. Abstract
+
+2. Keywords
+
+3. Introduction
+
+4. Related Work / Literature Review
+
+5. Research Gap
+
+6. Proposed Methodology
+
+7. Dataset Description
+
+8. Feature Extraction
+
+9. Machine Learning Models
+
+10. Experimental Setup
+
+11. Standard Evaluation Results
+
+12. Unseen-Family Evaluation
+
+13. Unknown/Novel Detection
+
+14. Explainable AI using SHAP
+
+15. Discussion
+
+16. Limitations
+
+17. Conclusion
+
+18. Future Work
+
+19. References
+
+📊 मेरा current estimate
+
+अगर सिर्फ ML implementation की बात करें:
+
+लगभग 90% complete ✅
+
+अगर पूरा research project + experiments देखें:
+
+लगभग 75–80% complete ✅
+
+अगर publication-ready research paper देखें:
+
+लगभग 55–65% complete — क्योंकि experiments के results आ गए हैं, लेकिन methodology, novelty experiment, discussion, figures, tables और proper paper writing बाकी है।
+
+सबसे important:
+
+अभी नया model train करने की जरूरत नहीं है।
+तुम्हारे पास standard evaluation + unseen-family evaluation + threshold analysis already है।
+
+अब हमें SHAP → Unknown/Novel Detection → Secondary Validation → Final graphs/tables → Research Paper की तरफ जाना चाहिए।
+
+और तुम्हारा generate_final_results.py successfully run हो चुका है, इसलिए final result aggregation भी complete है।
+
+Next step मैं तुम्हें SHAP का proper research-level code दूँगा, फिर उसके बाद Unknown/Novel ransomware detection वाला module बनाएँगे।

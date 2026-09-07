@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Ransomware Detection Result</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+
+            margin: 0;
+
+            font-family: Arial, sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #07111f,
+                    #0b1628,
+                    #101d33
+                );
+
+            color: white;
+
+            min-height: 100vh;
+
+            padding: 40px 20px;
+        }
+
+
+        .container {
+
+            max-width: 1000px;
+
+            margin: auto;
+
+            background: #111c2e;
+
+            padding: 35px;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 10px 40px rgba(0,0,0,0.4);
+        }
+
+
+        /* ==================================================
+           HEADER
+           ================================================== */
+
+        .header {
+
+            text-align: center;
+
+            margin-bottom: 30px;
+        }
+
+
+        .header h1 {
+
+            color: #00c8ff;
+
+            margin-bottom: 10px;
+
+            font-size: 32px;
+        }
+
+
+        .header p {
+
+            color: #aebbd0;
+
+            font-size: 15px;
+        }
+
+
+        /* ==================================================
+           FILE INFORMATION
+           ================================================== */
+
+        .file-box {
+
+            background: #18263b;
+
+            padding: 18px;
+
+            border-radius: 12px;
+
+            margin-bottom: 25px;
+
+            border-left: 4px solid #00c8ff;
+        }
+
+
+        .file-name {
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            word-break: break-all;
+        }
+
+
+        /* ==================================================
+           FINAL CLASSIFICATION
+           ================================================== */
+
+        .classification-box {
+
+            text-align: center;
+
+            background: #18263b;
+
+            padding: 30px;
+
+            border-radius: 15px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .classification-title {
+
+            color: #9aa9bf;
+
+            font-size: 14px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .classification {
+
+            font-size: 30px;
+
+            font-weight: bold;
+
+            padding: 15px 25px;
+
+            border-radius: 10px;
+
+            display: inline-block;
+
+            background: #202f45;
+        }
+
+
+        /* ==================================================
+           STATUS COLORS
+           ================================================== */
+
+        .benign {
+
+            color: #35e68a;
+
+            border: 1px solid #35e68a;
+        }
+
+
+        .ransomware {
+
+            color: #ffcc66;
+
+            border: 1px solid #ffcc66;
+        }
+
+
+        .novel {
+
+            color: #ff5252;
+
+            border: 1px solid #ff5252;
+        }
+
+
+        .anomalous {
+
+            color: #ffb347;
+
+            border: 1px solid #ffb347;
+        }
+
+
+        /* ==================================================
+           METRICS GRID
+           ================================================== */
+
+        .metrics {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 15px;
+
+            margin-bottom: 30px;
+        }
+
+
+        .metric {
+
+            background: #18263b;
+
+            padding: 20px;
+
+            border-radius: 12px;
+
+            text-align: center;
+        }
+
+
+        .metric-title {
+
+            color: #91a0b6;
+
+            font-size: 13px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .metric-value {
+
+            font-size: 23px;
+
+            font-weight: bold;
+
+            color: #00c8ff;
+        }
+
+
+        /* ==================================================
+           SECTION
+           ================================================== */
+
+        .section-title {
+
+            color: #00c8ff;
+
+            font-size: 21px;
+
+            margin:
+
+                30px 0 15px 0;
+        }
+
+
+        /* ==================================================
+           DETAILS
+           ================================================== */
+
+        .details {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 12px;
+        }
+
+
+        .detail {
+
+            background: #18263b;
+
+            padding: 15px;
+
+            border-radius: 8px;
+
+            color: #dce5f2;
+        }
+
+
+        .detail span {
+
+            float: right;
+
+            font-weight: bold;
+
+            color: white;
+        }
+
+
+        /* ==================================================
+           RISK
+           ================================================== */
+
+        .risk {
+
+            text-align: center;
+
+            padding: 20px;
+
+            background: #18263b;
+
+            border-radius: 12px;
+
+            margin-top: 25px;
+        }
+
+
+        .risk-label {
+
+            color: #9aa9bf;
+
+            font-size: 14px;
+        }
+
+
+        .risk-value {
+
+            font-size: 28px;
+
+            font-weight: bold;
+
+            margin-top: 8px;
+        }
+
+
+        /* ==================================================
+           BACK BUTTON
+           ================================================== */
+
+        .back {
+
+            text-align: center;
+
+            margin-top: 35px;
+        }
+
+
+        .back a {
+
+            display: inline-block;
+
+            padding: 13px 28px;
+
+            background: #008dcc;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+
+            transition: 0.2s;
+        }
+
+
+        .back a:hover {
+
+            background: #00a8e8;
+        }
+
+
+        /* ==================================================
+           RESPONSIVE
+           ================================================== */
+
+        @media (max-width: 700px) {
+
+            .metrics {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .details {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .container {
+
+                padding: 20px;
+            }
+
+
+            .classification {
+
+                font-size: 22px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- ==================================================
+         HEADER
+         ================================================== -->
+
+    <div class="header">
+
+        <h1>
+            AI-Based Ransomware Detection
+        </h1>
+
+        <p>
+            Static PE Feature Analysis using
+            Machine Learning and Novelty Detection
+        </p>
+
+    </div>
+
+
+    <!-- ==================================================
+         FILE
+         ================================================== -->
+
+    <div class="file-box">
+
+        <div>
+            ANALYZED FILE
+        </div>
+
+        <div class="file-name">
+
+            {{ filename }}
+
+        </div>
+
+    </div>
+
+
+    <!-- ==================================================
+         FINAL CLASSIFICATION
+         ================================================== -->
+
+    <div class="classification-box">
+
+        <div class="classification-title">
+
+            Final Classification
+
+        </div>
+
+
+        <div id="classification"
+             class="classification">
+
+            {{ result.classification }}
+
+        </div>
+
+    </div>
+
+
+    <!-- ==================================================
+         MAIN METRICS
+         ================================================== -->
+
+    <div class="metrics">
+
+
+        <div class="metric">
+
+            <div class="metric-title">
+
+                Ransomware Probability
+
+            </div>
+
+            <div class="metric-value">
+
+                {{ result.ransomware_probability }}%
+
+            </div>
+
+        </div>
+
+
+        <div class="metric">
+
+            <div class="metric-title">
+
+                Confidence
+
+            </div>
+
+            <div class="metric-value">
+
+                {{ result.ransomware_confidence }}%
+
+            </div>
+
+        </div>
+
+
+        <div class="metric">
+
+            <div class="metric-title">
+
+                Risk Level
+
+            </div>
+
+            <div class="metric-value">
+
+                {{ result.risk_level }}
+
+            </div>
+
+        </div>
+
+
+        <div class="metric">
+
+            <div class="metric-title">
+
+                Anomaly Score
+
+            </div>
+
+            <div class="metric-value">
+
+                {{ result.anomaly_score }}
+
+            </div>
+
+        </div>
+
+
+        <div class="metric">
+
+            <div class="metric-title">
+
+                Novelty Status
+
+            </div>
+
+            <div class="metric-value">
+
+                {{ result.novelty_status }}
+
+            </div>
+
+        </div>
+
+
+        <div class="metric">
+
+            <div class="metric-title">
+
+                Detection Type
+
+            </div>
+
+            <div class="metric-value">
+
+                {{ result.detection_type }}
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ==================================================
+         PE FEATURES
+         ================================================== -->
+
+    <div class="section-title">
+
+        Extracted PE Features
+
+    </div>
+
+
+    <div class="details">
+
+
+        <div class="detail">
+
+            API Count
+
+            <span>
+
+                {{ result.features.API_Count }}
+
+            </span>
+
+        </div>
+
+
+        <div class="detail">
+
+            DLL Count
+
+            <span>
+
+                {{ result.features.DLL_Count }}
+
+            </span>
+
+        </div>
+
+
+        <div class="detail">
+
+            Unique API Count
+
+            <span>
+
+                {{ result.features.Unique_API_Count }}
+
+            </span>
+
+        </div>
+
+
+        <div class="detail">
+
+            Unique DLL Count
+
+            <span>
+
+                {{ result.features.Unique_DLL_Count }}
+
+            </span>
+
+        </div>
+
+
+        <div class="detail">
+
+            File Size
+
+            <span>
+
+                {{ result.features.Size }}
+                bytes
+
+            </span>
+
+        </div>
+
+
+        <div class="detail">
+
+            Entropy
+
+            <span>
+
+                {{ result.features.Entropy }}
+
+            </span>
+
+        </div>
+
+
+        <div class="detail">
+
+            Packed
+
+            <span>
+
+                {% if result.features.Packed == 1 %}
+
+                    YES
+
+                {% else %}
+
+                    NO
+
+                {% endif %}
+
+            </span>
+
+        </div>
+
+
+        <div class="detail">
+
+            PE Year
+
+            <span>
+
+                {{ result.features.Year }}
+
+            </span>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ==================================================
+         RISK
+         ================================================== -->
+
+    <div class="risk">
+
+        <div class="risk-label">
+
+            SECURITY RISK ASSESSMENT
+
+        </div>
+
+        <div class="risk-value">
+
+            {{ result.risk_level }}
+
+        </div>
+
+    </div>
+
+
+    <!-- ==================================================
+         BACK
+         ================================================== -->
+
+    <div class="back">
+
+        <a href="/">
+
+            ← Analyze Another File
+
+        </a>
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+    // ======================================================
+    // CLASSIFICATION COLOR
+    // ======================================================
+
+    const classification =
+        document.getElementById(
+            "classification"
+        );
+
+    const text =
+        classification.innerText
+            .toUpperCase();
+
+
+    if (
+        text.includes(
+            "POTENTIALLY NOVEL"
+        )
+    ) {
+
+        classification.classList.add(
+            "novel"
+        );
+
+    }
+
+    else if (
+        text === "RANSOMWARE"
+    ) {
+
+        classification.classList.add(
+            "ransomware"
+        );
+
+    }
+
+    else if (
+        text.includes(
+            "ANOMALOUS"
+        )
+    ) {
+
+        classification.classList.add(
+            "anomalous"
+        );
+
+    }
+
+    else {
+
+        classification.classList.add(
+            "benign"
+        );
+
+    }
+
+</script>
+
+
+</body>
+
+</html>
