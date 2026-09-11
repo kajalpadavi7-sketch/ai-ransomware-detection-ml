@@ -1,0 +1,29 @@
+FINAL STANDARD TEST EVALUATION
+================================
+
+Selected Threshold: 0.50
+Threshold Selection: Highest Validation F1
+
+Accuracy: 0.9542
+Precision: 0.9622
+Recall: 0.9428
+F1: 0.9524
+ROC-AUC: 0.9898
+FPR: 0.0350
+FNR: 0.0572
+
+Confusion Matrix:
+TN = 16037
+FP = 582
+FN = 897
+TP = 14795
+
+Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.95      0.96      0.96     16619
+  Ransomware       0.96      0.94      0.95     15692
+
+    accuracy                           0.95     32311
+   macro avg       0.95      0.95      0.95     32311
+weighted avg       0.95      0.95      0.95     32311

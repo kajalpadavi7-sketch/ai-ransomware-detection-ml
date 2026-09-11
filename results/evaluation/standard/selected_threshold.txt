@@ -1,0 +1,4 @@
+Selected Threshold: 0.50
+Selection Criterion: Highest Validation F1
+Validation F1: 0.9503
+Test set was NOT used for threshold selection.
